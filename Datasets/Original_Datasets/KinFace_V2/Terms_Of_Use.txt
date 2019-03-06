@@ -1,0 +1,65 @@
+This dataset was collected by Northeastern University. All the credits go to their work.
+Please respect their Terms Of Use listed below and also available in their webpage:
+http://www1.ece.neu.edu/~yunfu/research/Kinface/Kinface.htm
+
+Terms of Use
+
+This dataset is for non-commercial research purposes only. The image copyright belongs to the original author or the media as listed in the following URL file. If you find this collection useful for your research, please cite the papers below.
+
+Citation
+
+1.    Siyu Xia, Ming Shao, Jiebo Luo, and Yun Fu, “Understanding Kin Relationships in a Photo”, IEEE Transactions on Multimedia (T-MM), Volume: 14, Issue: 4, Page(s): 1046-1056, 2012.
+
+2.    Siyu Xia, Ming Shao and Yun Fu, “Kinship Verification through Transfer Learning,” International Joint Conferences on Artificial Intelligence (IJCAI), pp. 2539-2544, 2011.
+
+3.    Ming Shao, Siyu Xia and Yun Fu, “Genealogical Face Recognition based on UB KinFace Database,” IEEE CVPR Workshop on Biometrics (BIOM), 2011.
+
+Bibtex
+
+@article{Buffalo_TMM_Kinship,
+
+ author = { S. Xia, M. Shao, J. Luo and Y. Fu },
+
+ title = {Understanding Kin Relationships in a Photo},
+
+ journal = {IEEE Transactions on Multimedia},
+
+ volume = {14},
+
+ number = {4},
+
+ year = {2012},
+
+ pages = {1046-1056},
+
+ }
+
+ 
+
+@inproceedings{Siyu_IJCAI11_Kinship,
+
+author = {S. Xia, M. Shao and Y. Fu},
+
+title = {Kinship Verification through Transfer Learning},
+
+booktitle = {Proc. International Joint Conferences on Artificial Intelligence (IJCAI)},
+
+pages={2539-2544},
+
+year = {2011},
+
+}
+
+ 
+
+@inproceedings{Ming_CVPR11_Genealogical,
+
+author = {M. Shao, S. Xia and Y. Fu},
+
+title = {Genealogical Face Recognition based on UB KinFace Database},
+
+booktitle = {Proc. IEEE CVPR Workshop on Biometrics (BIOM)},
+
+year = {2011},
+
+}
