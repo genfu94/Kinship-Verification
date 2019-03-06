@@ -1,0 +1,7 @@
+I cannot include the datasets since all of them are not redistributable.
+However I can provide you with a list of the datasets I used for training/testing:
+	1) UB KinFace V2: http://www1.ece.neu.edu/~yunfu/research/Kinface/Kinface.htm
+	2) KinFaceW-I / KinFaceW-II: http://www.kinfacew.com/download.html
+	3) TSKinFace: http://parnec.nuaa.edu.cn/xtan/data/TSKinFace.html
+	4) Family101: http://chenlab.ece.cornell.edu/projects/KinshipClassification/index.html
+	5) KinshipVerification: http://chenlab.ece.cornell.edu/projects/KinshipVerification/
