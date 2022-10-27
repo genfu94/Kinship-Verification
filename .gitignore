@@ -1,5 +1,4 @@
-../Datasets/KinFaceW-I/*
-../Datasets/KinFaceW-II/*
-Datasets/KinFaceW-I/*
-Datasets/KinFaceW-II/*
 *.pyc
+__pycache__
+
+Datasets/original
