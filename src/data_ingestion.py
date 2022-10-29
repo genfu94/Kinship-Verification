@@ -1,43 +1,53 @@
-from enum import Enum
-from tqdm import tqdm
-import requests
-import gdown
 import os
+import shutil
+from . import data_ingestion_utils
+
+DATA_SOURCES = [
+    {
+        'url': "http://www.kinfacew.com/dataset/KinFaceW-I.zip",
+        'filename': "KinFaceW-I.zip",
+        'source': data_ingestion_utils.DownloadSource.HTTP
+    },
+    {
+        'url': "http://www.kinfacew.com/dataset/KinFaceW-II.zip",
+        'filename': "KinFaceW-II.zip",
+        'source': data_ingestion_utils.DownloadSource.HTTP
+    },
+    {
+        'url': "http://www1.ece.neu.edu/~yunfu/research/Kinface/KinFace_V2.zip",
+        'filename': "KinFace_V2.zip",
+        'source': data_ingestion_utils.DownloadSource.HTTP
+    },
+    {
+        'url': "https://drive.google.com/file/d/1qhxX4YrJRXvxrybxQo0yGhkwUdmen-js/view",
+        'filename': "TSKinFace_Data.zip",
+        'source': data_ingestion_utils.DownloadSource.GOOGLE_DRIVE
+    },
+    {
+        'url': "http://chenlab.ece.cornell.edu/projects/KinshipClassification/Family101_150x120.zip",
+        'filename': "Family101_150x120.zip",
+        'source': data_ingestion_utils.DownloadSource.HTTP
+    },
+    {
+        'url': "http://chenlab.ece.cornell.edu/projects/KinshipVerification/KinshipVerification.zip",
+        'filename': "KinshipVerification.zip",
+        'source': data_ingestion_utils.DownloadSource.HTTP
+    }
+]
 
 
-class DownloadSource(Enum):
-	HTTP = 1
-	GOOGLE_DRIVE = 2
+def download_data(output_dir):
+    os.makedirs(output_dir, exist_ok=True)
+    
+    for data_source in DATA_SOURCES:
+        save_path = os.path.join(output_dir, data_source['filename'])
 
-# TODO: make interfaces for these download methods!
-def _retrieve_file_from_url(url: str, filepath: str, show_progres: bool = True):
-	with requests.get(url, stream=True) as r:
-		r.raise_for_status()
-		with open(filepath, 'wb') as f:
-			pbar = tqdm(total=int(r.headers['Content-Length']), unit = 'B', unit_scale = True, disable = not show_progres)
-			for chunk in r.iter_content(chunk_size=8192):
-				if chunk:  # filter out keep-alive new chunks
-					f.write(chunk)
-					pbar.update(len(chunk))
+        if os.path.exists(save_path.replace('.zip', '')):
+            print(f"Data from {data_source['url']} already exists. Skipping download")
+            continue
 
+        data_ingestion_utils.retrieve_data_from_url(data_source['url'], save_path, data_source['source'])
+        shutil.unpack_archive(save_path, output_dir)
+        os.remove(save_path)
 
-# TODO: check why this takes a lot of time before start downloading
-def _retrieve_file_from_google_drive(url: str, filepath: str, show_progress: bool = True):
-	gdown.download(url, filepath, quiet=False, fuzzy=show_progress)
-
-downloader_methods = {
-	DownloadSource.HTTP: _retrieve_file_from_url,
-	DownloadSource.GOOGLE_DRIVE: _retrieve_file_from_google_drive
-}
-
-def retrieve_data_from_url(url: str, filepath: str, source: DownloadSource, show_progress: bool = True):
-	if source not in downloader_methods:
-		raise("Download from the specified source is not implemented yet.")
-
-	downloader = downloader_methods[source]
-
-	if os.path.exists(filepath):
-		print(f"The resource {filepath} already exists. Skipping download.")
-		return
-
-	downloader(url, filepath, show_progress)
+    shutil.rmtree(os.path.join(output_dir, '__MACOSX'), ignore_errors = True)
